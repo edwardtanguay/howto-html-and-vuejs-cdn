@@ -14,11 +14,9 @@
 <body>
 	<h1>German Article Practice</h1>
 	<div id="app">
-		<div>Message: {{message}}</div>
-		<button @click="changeMessage()">Change message</button>
 		<ul>
 			<li v-for="noun in nouns">
-				{{noun}}
+				{{noun.singular}}
 			</li>
 		</ul>
 	</div>
@@ -32,13 +30,12 @@
 				}
 			},
 			methods: {
-				changeMessage() {
-					this.message = 'changed';
-					this.nouns.push('nnn');
-				},
 				initialize() {
-					this.message = 'changed on page load';
-					this.nouns = ['111','222','333'];
+					(async () => {
+						const response = await fetch('https://edwardtanguay.netlify.app/share/germanNouns.json');
+						this.nouns = await response.json();
+					})();
+
 				}
 			}
 		})
