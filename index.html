@@ -1,12 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible"
+		  content="IE=edge">
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1.0">
+	<script src="https://unpkg.com/vue@next"></script>
 	<title>German Article Practice</title>
 </head>
+
 <body>
-<h1>German Article Practice</h1>	
+	<h1>German Article Practice</h1>
+	<div id="app">
+		<div>Message: {{message}}</div>
+		<button @click="changeMessage()">Change message</button>
+		<ul>
+			<li v-for="noun in nouns">
+				{{noun}}
+			</li>
+		</ul>
+	</div>
+
+	<script>
+		const app = Vue.createApp({
+			data() {
+				return {
+					message: 'this is a test',
+					nouns: []
+				}
+			},
+			methods: {
+				changeMessage() {
+					this.message = 'changed';
+					this.nouns.push('nnn');
+				},
+				initialize() {
+					this.message = 'changed on page load';
+					this.nouns = ['111','222','333'];
+				}
+			}
+		})
+		const vm = app.mount('#app');
+		vm.initialize();
+	</script>
 </body>
+
 </html>
